@@ -42,7 +42,7 @@ with st.expander("새 매출 기록하기 (클릭하여 열기)"):
 
 # TAB 2: THE PREDICTION
 st.divider()
-st.subheader("예측: 향후 7일")
+st.subheader("주간 현금 예측")
 
 # Calculate averages
 df['Is_Payday'] = df['Date'].apply(is_payday)
@@ -56,23 +56,37 @@ avg_payday_amount = payday_data['Cash_Dispensed'].mean()
 today = datetime.datetime.now()
 forecast_data = []
 
+# --- KOREAN SETTINGS ---
+# Dictionary to translate English days to Korean
+korean_days = {
+    'Monday': '월요일',
+    'Tuesday': '화요일',
+    'Wednesday': '수요일',
+    'Thursday': '목요일',
+    'Friday': '금요일',
+    'Saturday': '토요일',
+    'Sunday': '일요일'
+}
+
+# Predict loop
 for i in range(1, 8):
     next_date = today + datetime.timedelta(days=i)
-    day_name = next_date.strftime('%A')
+    english_day = next_date.strftime('%A')
+    korean_day = korean_days[english_day] # Convert to Korean
     
     if is_payday(next_date):
         predicted = avg_payday_amount
-        day_type = "PAYDAY 🚨" # Added emoji for visual alert
+        day_type = "월급날 🚨" # "Payday" in Korean
     else:
-        predicted = normal_averages.get(day_name, 5000)
-        day_type = day_name
+        predicted = normal_averages.get(english_day, 5000)
+        day_type = korean_day
         
     safe_cash = predicted * 1.10
     
     forecast_data.append({
-        "Date": next_date.strftime('%Y-%m-%d'),
-        "Type": day_type,
-        "Safe Cash Needed": f"${safe_cash:,.0f}"
+        "날짜": next_date.strftime('%Y-%m-%d'),   # "Date"
+        "구분": day_type,                        # "Type" / "Classification"
+        "준비할 현금": f"${safe_cash:,.0f}"        # "Cash to Prepare"
     })
 
 # Show the table beautifully
@@ -80,5 +94,5 @@ st.dataframe(pd.DataFrame(forecast_data), use_container_width=True)
 
 # Show a chart
 st.divider()
-st.subheader("📈 비즈니스 성장")
+st.subheader("매출 추이")
 st.line_chart(df.set_index("Date")['Cash_Dispensed'])
