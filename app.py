@@ -19,7 +19,7 @@ except FileNotFoundError:
     st.stop()
 
 # --- THE WEBSITE LAYOUT ---
-st.title("가계부 시스템")
+st.title("CND EXPRESS 가계부 시스템")
 
 # TAB 1: LOG NEW DATA
 with st.expander("새 매출 기록하기 (클릭하여 열기)"):
