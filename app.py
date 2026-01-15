@@ -19,10 +19,10 @@ except FileNotFoundError:
     st.stop()
 
 # --- THE WEBSITE LAYOUT ---
-st.title("💰 현금 관리 대시보드")
+st.title("현금 관리 대시보드")
 
 # TAB 1: LOG NEW DATA
-with st.expander("📝 새 매출 기록하기 (클릭하여 열기)"):
+with st.expander("새 매출 기록하기 (클릭하여 열기)"):
     st.write("특정 날짜에 지출된 현금을 입력하세요:")
     
     col1, col2 = st.columns(2)
@@ -42,7 +42,7 @@ with st.expander("📝 새 매출 기록하기 (클릭하여 열기)"):
 
 # TAB 2: THE PREDICTION
 st.divider()
-st.subheader("📅 예측: 향후 7일")
+st.subheader("예측: 향후 7일")
 
 # Calculate averages
 df['Is_Payday'] = df['Date'].apply(is_payday)
