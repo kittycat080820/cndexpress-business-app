@@ -27,9 +27,9 @@ with st.expander("📝 새 매출 기록하기 (클릭하여 열기)"):
     
     col1, col2 = st.columns(2)
     with col1:
-        date_input = st.date_input("Date", datetime.date.today())
+        date_input = st.date_input("날짜", datetime.date.today())
     with col2:
-        amount_input = st.number_input("Amount ($)", min_value=0, step=100)
+        amount_input = st.number_input("금액 ($)", min_value=0, step=100)
         
     if st.button("Save Entry"):
         # Save to CSV
