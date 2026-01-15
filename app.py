@@ -19,11 +19,11 @@ except FileNotFoundError:
     st.stop()
 
 # --- THE WEBSITE LAYOUT ---
-st.title("💰 Mom's Cash Dashboard")
+st.title("💰 현금 관리 대시보드")
 
 # TAB 1: LOG NEW DATA
-with st.expander("📝 Log New Sales (Click to Open)"):
-    st.write("Enter the cash dispensed for a specific day:")
+with st.expander("📝 새 매출 기록하기 (클릭하여 열기)"):
+    st.write("특정 날짜에 지출된 현금을 입력하세요:")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -42,7 +42,7 @@ with st.expander("📝 Log New Sales (Click to Open)"):
 
 # TAB 2: THE PREDICTION
 st.divider()
-st.subheader("📅 Forecast: Next 7 Days")
+st.subheader("📅 예측: 향후 7일")
 
 # Calculate averages
 df['Is_Payday'] = df['Date'].apply(is_payday)
@@ -80,5 +80,5 @@ st.dataframe(pd.DataFrame(forecast_data), use_container_width=True)
 
 # Show a chart
 st.divider()
-st.subheader("📈 Business Growth")
+st.subheader("📈 비즈니스 성장")
 st.line_chart(df.set_index("Date")['Cash_Dispensed'])
