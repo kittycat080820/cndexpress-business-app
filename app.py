@@ -31,7 +31,7 @@ with st.expander("📝 새 매출 기록하기 (클릭하여 열기)"):
     with col2:
         amount_input = st.number_input("금액 ($)", min_value=0, step=100)
         
-    if st.button("Save Entry"):
+    if st.button("저장하기"):
         # Save to CSV
         new_row = pd.DataFrame({'Date': [date_input], 'Cash_Dispensed': [amount_input]})
         # Append to the file
